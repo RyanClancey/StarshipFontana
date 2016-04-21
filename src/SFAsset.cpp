@@ -112,7 +112,7 @@ void SFAsset::GoEast() {
   }
 }
 
-void SFAsset::GoNorth() {
+void SFAsset::GoNorth() { 
   Vector2 c = *(bbox->centre) + Vector2(0.0f, 5.0f);
   bbox->centre.reset();
   bbox->centre = make_shared<Vector2>(c);
@@ -141,7 +141,7 @@ bool SFAsset::IsAlive() {
 }
 
 void SFAsset::HandleCollision() {
-  if(SFASSET_PROJECTILE == type || SFASSET_ALIEN == type) {
-    SetNotAlive();
+  if(SFASSET_PROJECTILE == type /*|| SFASSET_ALIEN == type*/) {
+    SetNotAlive(); //destroys both projectile and alien when collision occurs
   }
 }
