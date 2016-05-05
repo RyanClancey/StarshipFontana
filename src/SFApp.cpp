@@ -9,23 +9,24 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   auto player_pos = Point2(canvas_w/2, 100);
   player->SetPosition(player_pos);
 
-  const int number_of_walls = 20;
-  for(int i=0; i<number_of_walls; i++) {
+  const int number_of_walls_top = 20;
+  for(int i=0; i<number_of_walls_top; i++) {
     // place a wall at width/number_of_walls * i
     auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
-    auto pos   = Point2((canvas_w/number_of_walls) * i + 18, 465.0f);
+    auto pos   = Point2((canvas_w/number_of_walls_top) * i + 18, 465.0f);
     wall->SetPosition(pos);
     walls.push_back(wall);
   }
   
-  const int number_of_walls_2 = 20;
-  for(int i=0; i<number_of_walls; i++) {
+  const int number_of_walls_bottom = 20;
+  for(int i=0; i<number_of_walls_bottom; i++) {
     // place a wall at width/number_of_walls * i
     auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
-    auto pos   = Point2((canvas_w/number_of_walls) * i + 18, 15.0f);
+    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 18, 15.0f);
     wall->SetPosition(pos);
     walls.push_back(wall);
   }
+  
 
   auto coin = make_shared<SFAsset>(SFASSET_COIN, sf_window);
   auto pos  = Point2((canvas_w/4), 100);
