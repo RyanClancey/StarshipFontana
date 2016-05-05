@@ -83,7 +83,6 @@ void SFApp::OnEvent(SFEvent& event) {
     break;
   case SFEVENT_PLAYER_DOWN:
     player->GoSouth();
-    break;
     for (auto w: walls)
     {
       if(player->CollidesWith(w))
@@ -91,6 +90,7 @@ void SFApp::OnEvent(SFEvent& event) {
         player->GoNorth();
       }
     }
+    break;
   case SFEVENT_FIRE:
     fire ++;
     FireProjectile();
