@@ -43,16 +43,44 @@ void SFApp::OnEvent(SFEvent& event) {
     break;
   case SFEVENT_PLAYER_LEFT:
     player->GoWest();
+    for (auto a: aliens)
+    {
+      if(player->CollidesWith(a))
+      {
+        player->GoEast();
+      }
+    }
     break;
   case SFEVENT_PLAYER_RIGHT:
     player->GoEast();
+    for (auto a: aliens)
+    {
+      if(player->CollidesWith(a))
+      {
+        player->GoWest();
+      }
+    }
     break;
   case SFEVENT_PLAYER_UP:
     player->GoNorth();
+    for (auto a: aliens)
+    {
+      if(player->CollidesWith(a))
+      {
+        player->GoSouth();
+      }
+    }
     break;
   case SFEVENT_PLAYER_DOWN:
     player->GoSouth();
     break;
+    for (auto a: aliens)
+    {
+      if(player->CollidesWith(a))
+      {
+        player->GoNorth();
+      }
+    }
   case SFEVENT_FIRE:
     fire ++;
     FireProjectile();
