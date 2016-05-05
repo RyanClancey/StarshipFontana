@@ -15,6 +15,9 @@ SFAsset::SFAsset(SFASSETTYPE type, std::shared_ptr<SFWindow> window): type(type)
   case SFASSET_ALIEN:
     sprite = IMG_LoadTexture(sf_window->getRenderer(), "assets/alien.png");
     break;
+  case SFASSET_WALL:
+    sprite = IMG_LoadTexture(sf_window->getRenderer(), "assets/wall.png");
+    break;
   case SFASSET_COIN:
     sprite = IMG_LoadTexture(sf_window->getRenderer(), "assets/coin.png");
     break;
