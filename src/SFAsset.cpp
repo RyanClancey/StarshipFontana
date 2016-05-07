@@ -7,7 +7,7 @@ SFAsset::SFAsset(SFASSETTYPE type, std::shared_ptr<SFWindow> window): type(type)
 
   switch (type) {
   case SFASSET_PLAYER:
-    sprite = IMG_LoadTexture(sf_window->getRenderer(), "assets/player.png");
+    sprite = IMG_LoadTexture(sf_window->getRenderer(), "assets/player2.png");
     break;
   case SFASSET_PROJECTILE:
     sprite = IMG_LoadTexture(sf_window->getRenderer(), "assets/projectile.png");

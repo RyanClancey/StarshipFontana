@@ -124,7 +124,34 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   for(int i=0; i<number_of_aliens; i++) {
     // place an alien at width/number_of_aliens * i
     auto alien = make_shared<SFAsset>(SFASSET_ALIEN, sf_window);
-    auto pos   = Point2((canvas_w/number_of_aliens) * i + 595, 310.f);
+    auto pos   = Point2((canvas_w/number_of_aliens) * i + 595, 325.f);
+    alien->SetPosition(pos);
+    aliens.push_back(alien);
+  }
+  
+  const int number_of_aliens_2 = 1;
+  for(int i=0; i<number_of_aliens_2; i++) {
+    // place an alien at width/number_of_aliens_2 * i
+    auto alien = make_shared<SFAsset>(SFASSET_ALIEN, sf_window);
+    auto pos   = Point2((canvas_w/number_of_aliens_2) * i + 595, 155.f);
+    alien->SetPosition(pos);
+    aliens.push_back(alien);
+  }
+  
+  const int number_of_aliens_3 = 1;
+  for(int i=0; i<number_of_aliens_3; i++) {
+    // place an alien at width/number_of_aliens_3 * i
+    auto alien = make_shared<SFAsset>(SFASSET_ALIEN, sf_window);
+    auto pos   = Point2((canvas_w/number_of_aliens_3) * i + 40, 425.f);
+    alien->SetPosition(pos);
+    aliens.push_back(alien);
+  }
+  
+  const int number_of_aliens_4 = 1;
+  for(int i=0; i<number_of_aliens_4; i++) {
+    // place an alien at width/number_of_aliens_4 * i
+    auto alien = make_shared<SFAsset>(SFASSET_ALIEN, sf_window);
+    auto pos   = Point2((canvas_w/number_of_aliens_4) * i + 40, 240.f);
     alien->SetPosition(pos);
     aliens.push_back(alien);
   }
