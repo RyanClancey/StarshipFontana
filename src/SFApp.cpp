@@ -6,7 +6,7 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
 
   app_box = make_shared<SFBoundingBox>(Vector2(canvas_w, canvas_h), canvas_w, canvas_h);
   player  = make_shared<SFAsset>(SFASSET_PLAYER, sf_window);
-  auto player_pos = Point2(canvas_w/2, 100);
+  auto player_pos = Point2(canvas_w/2, 60);
   player->SetPosition(player_pos);
 
 //Wall Placement for TOP and BOTTOM
@@ -33,7 +33,7 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   for(int i=0; i<number_of_walls_middle_1; i++) {
     // place a wall at width/number_of_walls_middle_1 * i
     auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
-    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 80, 100.f);
+    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 80, 110.f);
     wall->SetPosition(pos);
     walls.push_back(wall);
   }
@@ -42,7 +42,7 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   for(int i=0; i<number_of_walls_middle_1_2; i++) {
     // place a wall at width/number_of_walls_middle_1_2 * i
     auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
-    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 398, 100.f);
+    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 398, 110.f);
     wall->SetPosition(pos);
     walls.push_back(wall);
   }
@@ -51,7 +51,7 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   for(int i=0; i<number_of_walls_middle_2; i++) {
     // place a wall at width/number_of_walls_middle_2 * i
     auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
-    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 15, 185.f);
+    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 15, 195.f);
     wall->SetPosition(pos);
     walls.push_back(wall);
   }
@@ -60,7 +60,7 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   for(int i=0; i<number_of_walls_middle_2_2; i++) {
     // place a wall at width/number_of_walls_middle_2_2 * i
     auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
-    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 180, 185.f);
+    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 180, 195.f);
     wall->SetPosition(pos);
     walls.push_back(wall);
   }
@@ -69,7 +69,7 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   for(int i=0; i<number_of_walls_middle_2_3; i++) {
     // place a wall at width/number_of_walls_middle_2_3 * i
     auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
-    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 595, 185.f);
+    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 595, 195.f);
     wall->SetPosition(pos);
     walls.push_back(wall);
   }
@@ -78,7 +78,7 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   for(int i=0; i<number_of_walls_middle_3; i++) {
     // place a wall at width/number_of_walls_middle_3 * i
     auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
-    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 80, 270.f);
+    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 80, 280.f);
     wall->SetPosition(pos);
     walls.push_back(wall);
   }
@@ -87,7 +87,7 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   for(int i=0; i<number_of_walls_middle_3_2; i++) {
     // place a wall at width/number_of_walls_middle_3_2 * i
     auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
-    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 398, 270.f);
+    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 398, 280.f);
     wall->SetPosition(pos);
     walls.push_back(wall);
   }
@@ -96,7 +96,7 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   for(int i=0; i<number_of_walls_middle_4; i++) {
     // place a wall at width/number_of_walls_middle_4 * i
     auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
-    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 15, 355.f);
+    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 15, 365.f);
     wall->SetPosition(pos);
     walls.push_back(wall);
   }
@@ -105,7 +105,7 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   for(int i=0; i<number_of_walls_middle_4_2; i++) {
     // place a wall at width/number_of_walls_middle_4_2 * i
     auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
-    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 180, 355.f);
+    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 180, 365.f);
     wall->SetPosition(pos);
     walls.push_back(wall);
   }
@@ -114,11 +114,22 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   for(int i=0; i<number_of_walls_middle_4_3; i++) {
     // place a wall at width/number_of_walls_middle_4_3 * i
     auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
-    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 595, 355.f);
+    auto pos   = Point2((canvas_w/number_of_walls_bottom) * i + 595, 365.f);
     wall->SetPosition(pos);
     walls.push_back(wall);
   }
   
+  //Alien Placement
+  const int number_of_aliens = 1;
+  for(int i=0; i<number_of_aliens; i++) {
+    // place an alien at width/number_of_aliens * i
+    auto alien = make_shared<SFAsset>(SFASSET_ALIEN, sf_window);
+    auto pos   = Point2((canvas_w/number_of_aliens) * i + 595, 310.f);
+    alien->SetPosition(pos);
+    aliens.push_back(alien);
+  }
+  
+  //Coin Placement
   auto coin = make_shared<SFAsset>(SFASSET_COIN, sf_window);
   auto pos  = Point2((canvas_w/4), 100);
   coin->SetPosition(pos);
