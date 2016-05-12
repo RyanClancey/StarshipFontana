@@ -27,6 +27,7 @@ public:
   void    OnRender();
 
   void    FireProjectile();
+  void    glRasterPos2f(float x, float y);
 private:
   bool                    is_running;
 

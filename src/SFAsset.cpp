@@ -2,6 +2,7 @@
 
 int SFAsset::SFASSETID=0;
 
+
 SFAsset::SFAsset(SFASSETTYPE type, std::shared_ptr<SFWindow> window): type(type), sf_window(window) {
   this->id   = ++SFASSETID;
 
@@ -144,7 +145,9 @@ bool SFAsset::IsAlive() {
 }
 
 void SFAsset::HandleCollision() {
-  if(SFASSET_PROJECTILE == type /*|| SFASSET_ALIEN == type*/) {
-    SetNotAlive(); //destroys both projectile and alien when collision occurs
+  if(SFASSET_PROJECTILE == type || SFASSET_COIN == type) {
+    SetNotAlive(); //destroys both projectile and coin when collision occurs
   }
+  
+  
 }

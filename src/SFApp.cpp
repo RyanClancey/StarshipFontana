@@ -1,4 +1,5 @@
 #include "SFApp.h"
+auto score = 0;
 
 SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_window(window) {
   int canvas_w, canvas_h;
@@ -157,10 +158,16 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   }
   
   //Coin Placement
-  auto coin = make_shared<SFAsset>(SFASSET_COIN, sf_window);
-  auto pos  = Point2((canvas_w/4), 100);
-  coin->SetPosition(pos);
-  coins.push_back(coin);
+  const int number_of_coins = 1;
+  for(int i=0; i<number_of_coins; i++) {
+    // place a coin at width/number_of_coins * i
+    auto coin = make_shared<SFAsset>(SFASSET_COIN, sf_window);
+    auto pos   = Point2((canvas_w/number_of_coins) * i + 40, 60.f);
+    coin->SetPosition(pos);
+    coins.push_back(coin);
+  }
+  
+ 
 }
 
 SFApp::~SFApp() {
@@ -240,20 +247,41 @@ int SFApp::OnExecute() {
 
 void SFApp::OnUpdateWorld() {
   // Update projectile positions
-  for(auto p: projectiles) {
+  for(auto p : projectiles) {
     p->GoNorth();
   }
 
   for(auto c: coins) {
-    c->GoNorth();
+    
   }
 
   // Update enemy positions
   for(auto a : aliens) {
-    // do something here
-  }
+ 
+ 
+    
+    
+    /*if(a.GetPosition>=39)
+    {
+      a->GoWest();
+    }
+    else if(a.GetPosition<=596)
+    {
+      a->GoEast();*/
+    }
+  
 
-  // Detect collisions
+// Detect collisions between player and coin
+  for(auto c : coins) {
+      if(player->CollidesWith(c)) {
+        player->HandleCollision();
+        c->HandleCollision();
+        score = score + 10;
+        std::cout<<"Score: "<<score<<std::endl;
+      }
+    }
+
+  // Detect collisions between player and wall
   for(auto p : projectiles) {
     for(auto w : walls) {
       if(p->CollidesWith(w)) {
@@ -272,6 +300,16 @@ void SFApp::OnUpdateWorld() {
   }
   aliens.clear();
   aliens = list<shared_ptr<SFAsset>>(tmp);
+  
+  // remove collected coins (the long way)
+  list<shared_ptr<SFAsset>> tmp1;
+  for(auto c : coins) {
+    if(c->IsAlive()) {
+      tmp1.push_back(c);
+    }
+  }
+  coins.clear();
+  coins = list<shared_ptr<SFAsset>>(tmp1);
 }
 
 void SFApp::OnRender() {
@@ -289,12 +327,15 @@ void SFApp::OnRender() {
   }
 
   for(auto c: coins) {
-    c->OnRender();
+    if(c->IsAlive()) {c->OnRender();}
   }
 
   for(auto w: walls) {
     w->OnRender();
   }
+  
+  
+  
   // Switch the off-screen buffer to be on-screen
   SDL_RenderPresent(sf_window->getRenderer());
 }
@@ -305,3 +346,4 @@ void SFApp::FireProjectile() {
   pb->SetPosition(v);
   projectiles.push_back(pb);
 }
+
