@@ -121,6 +121,44 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   }
   
   
+  //Walls to send Aliens to other side of screen
+  const int edge_screen_1 = 1;
+  for(int i=0; i<edge_screen_1; i++) {
+    // place a wall at width/edge_screen_1 * i
+    auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
+    auto pos   = Point2((canvas_w/edge_screen_1) * i - 20, 155.f);
+    wall->SetPosition(pos);
+    walls.push_back(wall);
+  }
+  
+  const int edge_screen_2 = 1;
+  for(int i=0; i<edge_screen_2; i++) {
+    // place a wall at width/edge_screen_2 * i
+    auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
+    auto pos   = Point2((canvas_w/edge_screen_2) * i - 20, 240.f);
+    wall->SetPosition(pos);
+    walls.push_back(wall);
+  }
+  
+  const int edge_screen_3 = 1;
+  for(int i=0; i<edge_screen_3; i++) {
+    // place a wall at width/edge_screen_3 * i
+    auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
+    auto pos   = Point2((canvas_w/edge_screen_3) * i - 20, 325.f);
+    wall->SetPosition(pos);
+    walls.push_back(wall);
+  }
+  
+  const int edge_screen_4 = 1;
+  for(int i=0; i<edge_screen_4; i++) {
+    // place a wall at width/edge_screen_4 * i
+    auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
+    auto pos   = Point2((canvas_w/edge_screen_4) * i - 20, 415.f);
+    wall->SetPosition(pos);
+    walls.push_back(wall);
+  }
+  
+  
   //Coin Placement
   const int number_of_coins = 10;
   for(int i=0; i<number_of_coins; i++) {
@@ -302,18 +340,21 @@ void SFApp::OnUpdateWorld() {
 
   // Update enemy positions
   for(auto a : aliens) {
- 
- 
+  a->GoWest();
+  for (auto w: walls)
+    {
+      if(a->CollidesWith(w))
+      {
+        for(int i = 0; i < 200;i++){
+          a->GoEast();
+        }
+      }
+    }
+  
+      
     
     
-    /*if(a.GetPosition>=39)
-    {
-      a->GoWest();
-    }
-    else if(a.GetPosition<=596)
-    {
-      a->GoEast();*/
-    }
+  }
   
 
 // Detect collisions between player and coin
@@ -345,7 +386,7 @@ void SFApp::OnUpdateWorld() {
       }
     }
 
-  // Detect collisions between player and wall
+  // Detect collisions between projectile and wall
   for(auto p : projectiles) {
     for(auto w : walls) {
       if(p->CollidesWith(w)) {
