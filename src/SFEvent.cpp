@@ -25,9 +25,10 @@ SFEvent::SFEvent(const SDL_Event & event) {
     case SDLK_DOWN:
       code = SFEVENT_PLAYER_DOWN;
       break;
-    case SDLK_SPACE:
+      //Removed Projectiles
+    /*case SDLK_SPACE:
       code = SFEVENT_FIRE;
-      break;
+      break;*/
     case SDLK_q:
       code = SFEVENT_QUIT;
       break;

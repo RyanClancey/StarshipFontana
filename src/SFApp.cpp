@@ -135,7 +135,7 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   for(int i=0; i<edge_screen_2; i++) {
     // place a wall at width/edge_screen_2 * i
     auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
-    auto pos   = Point2((canvas_w/edge_screen_2) * i - 20, 240.f);
+    auto pos   = Point2((canvas_w/edge_screen_2) * i + 660, 240.f);
     wall->SetPosition(pos);
     walls.push_back(wall);
   }
@@ -153,7 +153,7 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   for(int i=0; i<edge_screen_4; i++) {
     // place a wall at width/edge_screen_4 * i
     auto wall = make_shared<SFAsset>(SFASSET_WALL, sf_window);
-    auto pos   = Point2((canvas_w/edge_screen_4) * i - 20, 415.f);
+    auto pos   = Point2((canvas_w/edge_screen_4) * i + 660, 415.f);
     wall->SetPosition(pos);
     walls.push_back(wall);
   }
@@ -218,20 +218,20 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   
   const int number_of_aliens_3 = 1;
   for(int i=0; i<number_of_aliens_3; i++) {
-    // place an alien at width/number_of_aliens_3 * i
-    auto alien = make_shared<SFAsset>(SFASSET_ALIEN, sf_window);
+    // place an alien2 at width/number_of_aliens_3 * i
+    auto alien2 = make_shared<SFAsset>(SFASSET_ALIEN2, sf_window);
     auto pos   = Point2((canvas_w/number_of_aliens_3) * i + 40, 415.f);
-    alien->SetPosition(pos);
-    aliens.push_back(alien);
+    alien2->SetPosition(pos);
+    aliens2.push_back(alien2);
   }
   
   const int number_of_aliens_4 = 1;
   for(int i=0; i<number_of_aliens_4; i++) {
-    // place an alien at width/number_of_aliens_4 * i
-    auto alien = make_shared<SFAsset>(SFASSET_ALIEN, sf_window);
+    // place an alien2 at width/number_of_aliens_4 * i
+    auto alien2 = make_shared<SFAsset>(SFASSET_ALIEN2, sf_window);
     auto pos   = Point2((canvas_w/number_of_aliens_4) * i + 40, 240.f);
-    alien->SetPosition(pos);
-    aliens.push_back(alien);
+    alien2->SetPosition(pos);
+    aliens2.push_back(alien2);
   }
   
   //Token Placement
@@ -340,7 +340,7 @@ void SFApp::OnUpdateWorld() {
 
   // Update enemy positions
   for(auto a : aliens) {
-  a->GoWest();
+  a->GoWestA();
   for (auto w: walls)
     {
       if(a->CollidesWith(w))
@@ -349,11 +349,20 @@ void SFApp::OnUpdateWorld() {
           a->GoEast();
         }
       }
-    }
+    } 
+  }
   
-      
-    
-    
+  for(auto a2 : aliens2) {
+  a2->GoEastA();
+  for (auto w: walls)
+    {
+      if(a2->CollidesWith(w))
+      {
+        for(int i = 0; i < 200;i++){
+          a2->GoWest();
+        }
+      }
+    } 
   }
   
 
@@ -385,6 +394,14 @@ void SFApp::OnUpdateWorld() {
         std::cout<<"Game Over - YOU LOSE! Score: "<<score<<std::endl;
       }
     }
+    
+  for(auto a2 : aliens2) {
+      if(player->CollidesWith(a2)) {
+        player->HandleCollision();
+        a2->HandleCollision();
+        std::cout<<"Game Over - YOU LOSE! Score: "<<score<<std::endl;
+      }
+    }
 
   // Detect collisions between projectile and wall
   for(auto p : projectiles) {
@@ -405,6 +422,15 @@ void SFApp::OnUpdateWorld() {
   }
   aliens.clear();
   aliens = list<shared_ptr<SFAsset>>(tmp);
+  
+  list<shared_ptr<SFAsset>> tmp3;
+  for(auto a2 : aliens2) {
+    if(a2->IsAlive()) {
+      tmp3.push_back(a2);
+    }
+  }
+  aliens2.clear();
+  aliens2 = list<shared_ptr<SFAsset>>(tmp3);
   
   // remove collected coins (the long way)
   list<shared_ptr<SFAsset>> tmp1;
@@ -439,6 +465,10 @@ void SFApp::OnRender() {
 
   for(auto a: aliens) {
     if(a->IsAlive()) {a->OnRender();}
+  }
+  
+  for(auto a2: aliens2) {
+    if(a2->IsAlive()) {a2->OnRender();}
   }
 
   for(auto c: coins) {

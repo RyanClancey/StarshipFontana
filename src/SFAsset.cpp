@@ -17,7 +17,10 @@ SFAsset::SFAsset(SFASSETTYPE type, std::shared_ptr<SFWindow> window): type(type)
     sprite = IMG_LoadTexture(sf_window->getRenderer(), "assets/coin2.png");
     break;
   case SFASSET_ALIEN:
-    sprite = IMG_LoadTexture(sf_window->getRenderer(), "assets/alien2.png");
+    sprite = IMG_LoadTexture(sf_window->getRenderer(), "assets/alien2l.png");
+    break;
+  case SFASSET_ALIEN2:
+    sprite = IMG_LoadTexture(sf_window->getRenderer(), "assets/alien2r.png");
     break;
   case SFASSET_WALL:
     sprite = IMG_LoadTexture(sf_window->getRenderer(), "assets/wall2.png");
@@ -101,6 +104,7 @@ void SFAsset::OnRender() {
   SDL_RenderCopy(sf_window->getRenderer(), sprite, NULL, &rect);
 }
 
+//Player Movement
 void SFAsset::GoWest() {
   Vector2 c = *(bbox->centre) + Vector2(-5.0f, 0.0f);
   if(!(c.getX() < 0)) {
@@ -132,6 +136,26 @@ void SFAsset::GoSouth() {
   bbox->centre = make_shared<Vector2>(c);
 }
 
+//Alien Movement
+void SFAsset::GoWestA() {
+  Vector2 c = *(bbox->centre) + Vector2(-3.0f, 0.0f);
+  if(!(c.getX() < 0)) {
+    bbox->centre.reset();
+    bbox->centre = make_shared<Vector2>(c);
+  }
+}
+
+void SFAsset::GoEastA() {
+  int w, h;
+  SDL_GetRendererOutputSize(sf_window->getRenderer(), &w, &h);
+
+  Vector2 c = *(bbox->centre) + Vector2(3.0f, 0.0f);
+  if(!(c.getX() > w)) {
+    bbox->centre.reset();
+    bbox->centre = make_shared<Vector2>(c);
+  }
+}
+
 bool SFAsset::CollidesWith(shared_ptr<SFAsset> other) {
   return bbox->CollidesWith(other->bbox);
 }
@@ -149,8 +173,8 @@ bool SFAsset::IsAlive() {
 }
 
 void SFAsset::HandleCollision() {
-  if(SFASSET_PROJECTILE == type || SFASSET_COIN == type || SFASSET_TOKEN == type || SFASSET_ALIEN == type) {
-    SetNotAlive(); //destroys projectile and coin when collision occurs
+  if(SFASSET_PROJECTILE == type || SFASSET_COIN == type || SFASSET_TOKEN == type || SFASSET_ALIEN == type || SFASSET_ALIEN2 == type) {
+    SetNotAlive(); //destroys projectile, coin, aliens, and token when collision occurs
   }
   
   
