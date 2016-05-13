@@ -120,6 +120,45 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
     walls.push_back(wall);
   }
   
+  
+  //Coin Placement
+  const int number_of_coins = 10;
+  for(int i=0; i<number_of_coins; i++) {
+    // place a coin at width/number_of_coins * i
+    auto coin = make_shared<SFAsset>(SFASSET_COIN, sf_window);
+    auto pos   = Point2((canvas_w/number_of_coins) * i + 32, 60.f);
+    coin->SetPosition(pos);
+    coins.push_back(coin);
+  }
+    
+  const int number_of_coins_2 = 10;
+  for(int i=0; i<number_of_coins_2; i++) {
+    // place a coin at width/number_of_coins_2 * i
+    auto coin = make_shared<SFAsset>(SFASSET_COIN, sf_window);
+    auto pos   = Point2((canvas_w/number_of_coins) * i + 32, 155.f);
+    coin->SetPosition(pos);
+    coins.push_back(coin);
+  }
+    
+  const int number_of_coins_3 = 10;
+  for(int i=0; i<number_of_coins_3; i++) {
+    // place a coin at width/number_of_coins_3 * i
+    auto coin = make_shared<SFAsset>(SFASSET_COIN, sf_window);
+    auto pos   = Point2((canvas_w/number_of_coins) * i + 32, 240.f);
+    coin->SetPosition(pos);
+    coins.push_back(coin);
+  }
+    
+  const int number_of_coins_4 = 10;
+  for(int i=0; i<number_of_coins_4; i++) {
+    // place a coin at width/number_of_coins_4 * i
+    auto coin = make_shared<SFAsset>(SFASSET_COIN, sf_window);
+    auto pos   = Point2((canvas_w/number_of_coins) * i + 32, 325.f);
+    coin->SetPosition(pos);
+    coins.push_back(coin);
+  }
+  
+  
   //Alien Placement
   const int number_of_aliens = 1;
   for(int i=0; i<number_of_aliens; i++) {
@@ -157,15 +196,7 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
     aliens.push_back(alien);
   }
   
-  //Coin Placement
-  const int number_of_coins = 1;
-  for(int i=0; i<number_of_coins; i++) {
-    // place a coin at width/number_of_coins * i
-    auto coin = make_shared<SFAsset>(SFASSET_COIN, sf_window);
-    auto pos   = Point2((canvas_w/number_of_coins) * i + 40, 60.f);
-    coin->SetPosition(pos);
-    coins.push_back(coin);
-  }
+  
   
  
 }
