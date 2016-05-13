@@ -27,7 +27,6 @@ public:
   void    OnRender();
 
   void    FireProjectile();
-  void    glRasterPos2f(float x, float y);
 private:
   bool                    is_running;
 
@@ -39,6 +38,7 @@ private:
   list<shared_ptr<SFAsset> > coins;
   list<shared_ptr<SFAsset> > aliens;
   list<shared_ptr<SFAsset> > walls;
+  list<shared_ptr<SFAsset> > tokens;
 
   int fire;
 };

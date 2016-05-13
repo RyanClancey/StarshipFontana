@@ -182,7 +182,7 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
   for(int i=0; i<number_of_aliens_3; i++) {
     // place an alien at width/number_of_aliens_3 * i
     auto alien = make_shared<SFAsset>(SFASSET_ALIEN, sf_window);
-    auto pos   = Point2((canvas_w/number_of_aliens_3) * i + 40, 425.f);
+    auto pos   = Point2((canvas_w/number_of_aliens_3) * i + 40, 415.f);
     alien->SetPosition(pos);
     aliens.push_back(alien);
   }
@@ -194,6 +194,16 @@ SFApp::SFApp(std::shared_ptr<SFWindow> window) : fire(0), is_running(true), sf_w
     auto pos   = Point2((canvas_w/number_of_aliens_4) * i + 40, 240.f);
     alien->SetPosition(pos);
     aliens.push_back(alien);
+  }
+  
+  //Token Placement
+  const int number_of_tokens = 1;
+  for(int i=0; i<number_of_tokens; i++) {
+    // place a token at width/number_of_tokens * i
+    auto token = make_shared<SFAsset>(SFASSET_TOKEN, sf_window);
+    auto pos   = Point2((canvas_w/number_of_tokens) * i + 320, 415.f);
+    token->SetPosition(pos);
+    tokens.push_back(token);
   }
   
   
@@ -285,6 +295,10 @@ void SFApp::OnUpdateWorld() {
   for(auto c: coins) {
     
   }
+  
+  for(auto t: tokens) {
+    
+  }
 
   // Update enemy positions
   for(auto a : aliens) {
@@ -309,6 +323,25 @@ void SFApp::OnUpdateWorld() {
         c->HandleCollision();
         score = score + 10;
         std::cout<<"Score: "<<score<<std::endl;
+      }
+    }
+    
+// Detect collisions between player and token
+  for(auto t : tokens) {
+      if(player->CollidesWith(t)) {
+        player->HandleCollision();
+        t->HandleCollision();
+        score = score + 100;
+        std::cout<<"Game Over - YOU WIN! Score: "<<score<<std::endl;
+      }
+    }
+    
+// Detect collisions between player and alien
+  for(auto a : aliens) {
+      if(player->CollidesWith(a)) {
+        player->HandleCollision();
+        a->HandleCollision();
+        std::cout<<"Game Over - YOU LOSE! Score: "<<score<<std::endl;
       }
     }
 
@@ -341,6 +374,16 @@ void SFApp::OnUpdateWorld() {
   }
   coins.clear();
   coins = list<shared_ptr<SFAsset>>(tmp1);
+  
+  // remove collected token (the long way)
+  list<shared_ptr<SFAsset>> tmp2;
+  for(auto t : tokens) {
+    if(t->IsAlive()) {
+      tmp2.push_back(t);
+    }
+  }
+  tokens.clear();
+  tokens = list<shared_ptr<SFAsset>>(tmp2);
 }
 
 void SFApp::OnRender() {
@@ -359,6 +402,10 @@ void SFApp::OnRender() {
 
   for(auto c: coins) {
     if(c->IsAlive()) {c->OnRender();}
+  }
+  
+  for(auto t: tokens) {
+    if(t->IsAlive()) {t->OnRender();}
   }
 
   for(auto w: walls) {

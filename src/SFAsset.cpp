@@ -22,6 +22,9 @@ SFAsset::SFAsset(SFASSETTYPE type, std::shared_ptr<SFWindow> window): type(type)
   case SFASSET_WALL:
     sprite = IMG_LoadTexture(sf_window->getRenderer(), "assets/wall2.png");
     break;
+  case SFASSET_TOKEN:
+    sprite = IMG_LoadTexture(sf_window->getRenderer(), "assets/coin.png");
+    break;
   
   }
 
@@ -146,8 +149,8 @@ bool SFAsset::IsAlive() {
 }
 
 void SFAsset::HandleCollision() {
-  if(SFASSET_PROJECTILE == type || SFASSET_COIN == type) {
-    SetNotAlive(); //destroys both projectile and coin when collision occurs
+  if(SFASSET_PROJECTILE == type || SFASSET_COIN == type || SFASSET_TOKEN == type || SFASSET_ALIEN == type) {
+    SetNotAlive(); //destroys projectile and coin when collision occurs
   }
   
   
