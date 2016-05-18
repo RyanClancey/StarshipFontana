@@ -14,9 +14,12 @@ of Commander Fontana in **Starship Fontana**.
 
 ## Installation ##
 You will have to have the SDL development libraries installed on
-your system.  The easiest way to compile is to use a command-line
+your system. The game is on a branch called 'pacman' so you will need 
+to first select the branch before compiling. The easiest way to switch 
+branch and compile is to use a command-line
 
 ```bash
+$ git checkout pacman
 $ g++ -c -std=c++11 src/*.cpp
 $ g++ -o starship *.o -lSDL2 -lSDL2_image
 ```
