@@ -383,6 +383,7 @@ void SFApp::OnUpdateWorld() {
         t->HandleCollision();
         score = score + 100;
         std::cout<<"Game Over - YOU WIN! Score: "<<score<<std::endl;
+        is_running = false;
       }
     }
     
@@ -392,6 +393,7 @@ void SFApp::OnUpdateWorld() {
         player->HandleCollision();
         a->HandleCollision();
         std::cout<<"Game Over - YOU LOSE! Score: "<<score<<std::endl;
+        is_running = false;
       }
     }
     
